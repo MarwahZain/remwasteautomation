@@ -13,6 +13,7 @@ This project is a test automation framework designed to test the **MERN Auth & U
 ---
 
 ## 📁 Project Structure
+```
 demo-automation/
 ├── src
 │ ├── main
@@ -27,32 +28,7 @@ demo-automation/
 │ └── resources/features/ # Cucumber .feature files
 ├── pom.xml
 └── README.md
-
-
----
-
-## ✅ Features Covered
-
-- Login with valid/invalid credentials
-- Create a new item
-- Edit an existing item
-- Delete an item
-- Assert expected data on dashboard
-
----
-
-## ⚙️ Setup Instructions
-
-### 1. 📦 Prerequisites
-
-- Java JDK 11+
-- Maven
-- Chrome browser (for now)
-- Node.js + npm (for backend/frontend if running locally)
-
-### 2. 🔧 Install Project Dependencies
-
-mvn clean install
+```
 
 ---
 
@@ -76,7 +52,33 @@ mvn clean install
 - Node.js + npm (for backend/frontend if running locally)
 
 ### 2. 🔧 Install Project Dependencies
-mvn clean install
+
+```mvn clean install```
+
+---
+
+## ✅ Features Covered
+
+- Login with valid/invalid credentials
+- Create a new item
+- Edit an existing item
+- Delete an item
+- Assert expected data on dashboard
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. 📦 Prerequisites
+```
+- Java JDK 11+
+- Maven
+- Chrome browser (for now)
+- Node.js + npm (for backend/frontend if running locally)
+```
+
+### 2. 🔧 Install Project Dependencies
+``` mvn clean install ```
 
 ### 3. ⚙️ Configuration
 Update the following file with environment-specific values:
@@ -98,7 +100,7 @@ invalid.password=wrongpass
 ```mvn test```
 
 ## Run tests by tag:
-mvn test -Dcucumber.filter.tags="@Login"
+``` mvn test -Dcucumber.filter.tags="@Login" ```
 
 ## 📊 Reporting
 After execution, open:
