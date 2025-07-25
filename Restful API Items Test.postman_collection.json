@@ -1,0 +1,213 @@
+{
+	"info": {
+		"_postman_id": "b0cc8b6c-237c-4eb7-bd1b-ab25145b00fc",
+		"name": "Restful API Items Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4063080"
+	},
+	"item": [
+		{
+			"name": "Get All Items",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response is a JSON array\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an('array');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/objects",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"objects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post New Item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"const response = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200 or 201\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							"",
+							"pm.test(\"Item created with ID\", function () {",
+							"    pm.expect(response).to.have.property(\"id\");",
+							"});",
+							"",
+							"// ✅ Save ID to environment",
+							"pm.environment.set(\"item_id\", response.id);",
+							"",
+							"// ✅ Optional: verify",
+							"pm.test(\"ID saved to env\", function () {",
+							"    pm.expect(pm.environment.get(\"item_id\")).to.not.be.undefined;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Samsung Galaxy A72\",\n    \"data\": {\n        \"brand\": \"Samsung\",\n        \"camera\": \"64MP\",\n        \"battery\": \"5000mAh\",\n        \"price\": 420.99\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/objects",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"objects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Updated name is correct\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Samsung Galaxy A72 Updated\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Samsung Galaxy A72 Updated\",\n    \"data\": {\n        \"brand\": \"Samsung\",\n        \"camera\": \"108MP\",\n        \"battery\": \"6000mAh\",\n        \"price\": 499.99\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/items/{{item_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"items",
+						"{{item_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Item deletion confirmed\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.include(\"deleted\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/items/{{item_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"items",
+						"{{item_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://api.restful-api.dev",
+			"type": "string"
+		}
+	]
+}
