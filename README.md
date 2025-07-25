@@ -76,15 +76,14 @@ mvn clean install
 - Node.js + npm (for backend/frontend if running locally)
 
 ### 2. 🔧 Install Project Dependencies
-
 mvn clean install
-3. ⚙️ Configuration
+
+### 3. ⚙️ Configuration
 Update the following file with environment-specific values:
 
-4. properties
-
-# src/main/resources/config/test-config.properties
-
+### 4. properties
+src/main/resources/config/test-config.properties
+```
 base.url=http://localhost:3000
 api.url=http://localhost:5000/api
 
@@ -93,10 +92,10 @@ valid.password=123456
 
 invalid.username=wrong@example.com
 invalid.password=wrongpass
-
+```
 
 ## Run all scenarios:
-mvn tes
+```mvn test```
 
 ## Run tests by tag:
 mvn test -Dcucumber.filter.tags="@Login"
